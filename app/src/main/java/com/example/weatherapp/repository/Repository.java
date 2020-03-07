@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.weatherapp.model.Weather;
+import com.example.weatherapp.utility.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,17 +32,14 @@ public class Repository {
         service = retrofit.create(WeatherService.class);
     }
 
-    public WeatherService getService() {
-        return service;
-    }
-
-        public MutableLiveData<Weather> getWeather(String cityId){
+    public MutableLiveData<Weather> getWeather(String cityId){
         final MutableLiveData<Weather> data = new MutableLiveData<>();
         service.getWeather(cityId, "10ce7a8b71d274aae09250389c394f2d", "metric").enqueue(new Callback<Weather>() {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
                 Log.d(TAG, "onResponse: ");
-                data.setValue(response.body());
+                Weather weather = Util.formatWeather(response.body());
+                data.setValue(weather);
             }
 
             @Override

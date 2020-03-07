@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="85dp"
-                    android:text="Ha Noi - VN"
+                    android:text="@{weather.cityName}"
                     android:textSize="35dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,21 +69,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="4:30 pm - Saturday, 7 Mar 2020"
+                    android:text="@{weather.updateTime}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
-
+<!--                android:text="4:30 pm - Saturday, 7 Mar 2020"-->
                 <TextView
                     android:id="@+id/tvTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="75dp"
-                    android:text="23°"
+                    android:text="@{weather.temp}"
                     android:textSize="75dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCurrentTime" />
-
+<!--                android:text="23°"-->
                 <ImageView
                     android:id="@+id/imgIcon"
                     android:layout_width="40dp"
@@ -99,20 +99,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="7dp"
-                    android:text="Windy"
+                    android:text="@{weather.state}"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imgIcon"
                     app:layout_constraintTop_toTopOf="@+id/imgIcon" />
+<!--                android:text="Windy"-->
 
                 <TextView
                     android:id="@+id/tvFeel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Feels like 21°"
+                    android:text="@{weather.feelLike}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imgIcon" />
+<!--                android:text="Feels like 21°"-->
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -157,7 +159,7 @@
                             android:id="@+id/tvWindSpeed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="13"
+                            android:text="@{weather.speed}"
                             android:textSize="20dp" />
 
                         <TextView
@@ -186,7 +188,7 @@
                             android:id="@+id/tvVisibleDistance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="6"
+                            android:text="@{weather.visibility}"
                             android:textSize="20dp" />
 
                         <TextView
@@ -215,7 +217,7 @@
                             android:id="@+id/tvHumidity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="80"
+                            android:text="@{weather.humidity}"
                             android:textSize="20dp" />
 
                         <TextView
@@ -256,7 +258,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6:30"
+                    android:text="@{weather.sunrise}"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -274,7 +276,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6:30"
+                    android:text="@{weather.sunset}"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
