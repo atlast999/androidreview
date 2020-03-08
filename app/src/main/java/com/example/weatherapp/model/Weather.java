@@ -19,7 +19,7 @@ public class Weather {
     private MWind mWind;
     @SerializedName("sys")
     private MSys mSys;
-
+    //getter
     public String getCityName(){
         return cityName;
     }
@@ -50,15 +50,50 @@ public class Weather {
     public String getCountryCode() {
         return mSys.countryCode;
     }
-
     public String getSunrise() {
         return mSys.sunrise;
     }
-
     public String getSunset() {
         return mSys.sunset;
     }
 
+    //setter
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+    public void setTemp(String temp) {
+        this.mMain.temp = temp;
+    }
+    public void setFeelLike(String feelLike) {
+        this.mMain.feelLike = feelLike;
+    }
+    public void setHumidity(String humidity) {
+        this.mMain.humidity = humidity;
+    }
+    public void setState(String state) {
+        this.mWeather.get(0).state = state;
+    }
+    public void setIconCode(String iconCode) {
+        this.mWeather.get(0).iconCode = iconCode;
+    }
+    public void setSpeed(String speed) {
+        this.mWind.speed = speed;
+    }
+    public void setCountryCode(String countryCode) {
+        this.mSys.countryCode = countryCode;
+    }
+    public void setSunrise(String sunrise) {
+        this.mSys.sunrise = sunrise;
+    }
+    public void setSunset(String sunset) {
+        this.mSys.sunset = sunset;
+    }
 
     class MSys{
         @SerializedName("country")
@@ -87,7 +122,5 @@ public class Weather {
         public String feelLike;
         @SerializedName("humidity")
         public String humidity;
-
-
     }
 }
