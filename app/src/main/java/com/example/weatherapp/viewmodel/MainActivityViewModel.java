@@ -4,9 +4,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.weatherapp.model.Weather;
-import com.example.weatherapp.repository.Repository;
+import com.example.weatherapp.repository.RepositoryWeather;
 
 public class MainActivityViewModel extends ViewModel {
+    private MutableLiveData<Weather> mWeather = new MutableLiveData<>();
     private MutableLiveData<String > cityId = new MutableLiveData<>();
 
     public MutableLiveData<String> getCityId() {
@@ -18,6 +19,9 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public MutableLiveData<Weather> getWeather(String cityId){
-        return Repository.getInstance().getWeather(cityId);
+        return RepositoryWeather.getInstance().getWeather(cityId);
+//        mWeather.postValue(RepositoryWeather.getInstance().getWeatherm(cityId));
+//        return mWeather;
     }
+
 }

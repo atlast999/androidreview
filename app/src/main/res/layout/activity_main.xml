@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="weather"
             type="com.example.weatherapp.model.Weather" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
@@ -18,8 +18,8 @@
             android:id="@+id/imgBackground"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:alpha="0.4"
             android:scaleType="fitXY"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -28,29 +28,38 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/cold" />
 
-        <ScrollView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        </FrameLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imgSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_search" />
 
                 <TextView
                     android:id="@+id/tvCityName"
@@ -72,7 +81,7 @@
                     android:text="@{weather.updateTime}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
-<!--                android:text="4:30 pm - Saturday, 7 Mar 2020"-->
+                <!--                android:text="4:30 pm - Saturday, 7 Mar 2020"-->
                 <TextView
                     android:id="@+id/tvTemperature"
                     android:layout_width="wrap_content"
@@ -83,7 +92,7 @@
                     android:textSize="75dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCurrentTime" />
-<!--                android:text="23°"-->
+                <!--                android:text="23°"-->
                 <ImageView
                     android:id="@+id/imgIcon"
                     android:layout_width="40dp"
@@ -91,7 +100,7 @@
                     android:layout_marginLeft="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    loadImage="@{weather.iconCode}" />
 
                 <TextView
                     android:id="@+id/tvWeatherState"
@@ -104,7 +113,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imgIcon"
                     app:layout_constraintTop_toTopOf="@+id/imgIcon" />
-<!--                android:text="Windy"-->
+                <!--                android:text="Windy"-->
 
                 <TextView
                     android:id="@+id/tvFeel"
@@ -114,7 +123,7 @@
                     android:text="@{weather.feelLike}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imgIcon" />
-<!--                android:text="Feels like 21°"-->
+                <!--                android:text="Feels like 21°"-->
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -268,9 +277,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="Sunset"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar"
-                    android:textStyle="bold" />
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
                 <TextView
                     android:id="@+id/textView11"

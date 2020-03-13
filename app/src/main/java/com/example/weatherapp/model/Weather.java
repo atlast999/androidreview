@@ -1,10 +1,17 @@
 package com.example.weatherapp.model;
 
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public class Weather {
+    private double realFeel;
     @SerializedName("name")
     private String cityName;
     @SerializedName("dt")
@@ -19,7 +26,13 @@ public class Weather {
     private MWind mWind;
     @SerializedName("sys")
     private MSys mSys;
+    @SerializedName("timezone")
+    private String timezone;
     //getter
+    public double getRealFeel() {
+        return realFeel;
+    }
+
     public String getCityName(){
         return cityName;
     }
@@ -56,8 +69,15 @@ public class Weather {
     public String getSunset() {
         return mSys.sunset;
     }
+    public String getTimezone() {
+        return timezone;
+    }
 
     //setter
+    public void setRealFeel(double realFeel) {
+        this.realFeel = realFeel;
+    }
+
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
@@ -94,6 +114,13 @@ public class Weather {
     public void setSunset(String sunset) {
         this.mSys.sunset = sunset;
     }
+    //set image
+    @BindingAdapter("loadImage")
+    public static void loadImage(ImageView imageView, String imageUrl){
+        Glide.with(imageView.getContext())
+                .load(imageUrl)
+                .into(imageView);
+    }
 
     class MSys{
         @SerializedName("country")
@@ -122,5 +149,11 @@ public class Weather {
         public String feelLike;
         @SerializedName("humidity")
         public String humidity;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.cityName;
     }
 }
