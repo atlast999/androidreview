@@ -43,6 +43,19 @@ public class MainActivity extends AppCompatActivity implements Observer<String>,
 
         viewModel.getCityId().observe(this, this);
 
+        viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isLoading) {
+                if(isLoading){
+                    binding.progressLoad.setVisibility(View.VISIBLE);
+                    binding.scrollView.setVisibility(View.GONE);
+                }else {
+                    binding.scrollView.setVisibility(View.VISIBLE);
+                    binding.progressLoad.setVisibility(View.GONE);
+                }
+            }
+        });
+
         viewModel.setCityId("1835848");
 
         binding.toolbar.setTitle("");
@@ -91,27 +104,15 @@ public class MainActivity extends AppCompatActivity implements Observer<String>,
 
     @Override
     public void onChanged(String cityId) {
-        viewModel.getWeather(cityId).observe(this, new Observer<Weather>() {
-            @Override
-            public void onChanged(Weather weather) {
-                new AsyncTask<Weather, Weather, Weather>() {
-                    @Override
-                    protected Weather doInBackground(Weather... weathers) {
-                        return Util.formatWeather(weathers[0]);
-                    }
-                    @Override
-                    protected void onPostExecute(Weather weather) {
-                        Util.changeBackGround(MainActivity.this, weather, binding.imgBackground);
-                        binding.setWeather(weather);
-                    }
-                }.execute(weather);
-            }
-        });
+        Weather currentWeather = viewModel.getWeather();
+        Util.changeBackGround(MainActivity.this, currentWeather, binding.imgBackground);
+        binding.setWeather(currentWeather);
     }
 
     @Override
     public void onCitySelectedListener(String cityId) {
         disableFragment();
+        searchView.setIconified(true);
         //close searchView when a new location is selected
         searchView.onActionViewCollapsed();
         viewModel.setCityId(cityId);

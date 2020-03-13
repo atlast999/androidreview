@@ -67,12 +67,14 @@ public class SearchCityFragment extends Fragment implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(TAG, "onItemClick: id = " + id);
         listener.onCitySelectedListener(String.valueOf(id));
     }
 
     @Override
     public void onQueryChangedListener(String newText) {
-        adapter.getFilter().filter(newText);
+        if(!newText.trim().isEmpty()){
+            adapter.getFilter().filter(newText);
+        }
+
     }
 }

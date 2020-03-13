@@ -1,9 +1,5 @@
 package com.example.weatherapp.repository;
 
-import android.util.Log;
-
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.weatherapp.model.Weather;
 
 import retrofit2.Call;
@@ -13,6 +9,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RepositoryWeather {
+    private boolean isGetting = false;
+    private Weather curWeather;
     private static final String TAG = "Repository";
     private static RepositoryWeather instance;
     private WeatherService service;
@@ -31,19 +29,21 @@ public class RepositoryWeather {
         service = retrofit.create(WeatherService.class);
     }
 
-    public MutableLiveData<Weather> getWeather(String cityId){
-        final MutableLiveData<Weather> data = new MutableLiveData<>();
+    public Weather getWeather(String cityId){
+        curWeather = new Weather();
+        isGetting = true;
         service.getWeather(cityId, "10ce7a8b71d274aae09250389c394f2d", "metric").enqueue(new Callback<Weather>() {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
-                Log.d(TAG, "onResponse: "+ response.body().toString());
-                data.setValue(response.body());
+                curWeather = response.body();
+                isGetting = false;
             }
             @Override
             public void onFailure(Call<Weather> call, Throwable t) {
-                Log.d(TAG, "onFailure: ");
+
             }
         });
-        return data;
+        while (isGetting);
+        return curWeather;
     }
 }

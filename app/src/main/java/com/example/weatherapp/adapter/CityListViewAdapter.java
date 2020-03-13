@@ -57,6 +57,8 @@ public class CityListViewAdapter extends ArrayAdapter<City> {
                             filteredList.add(city);
                         }
                     }
+                }else {
+                    filteredList = listCities;
                 }
                 return null;
             }

@@ -80,6 +80,7 @@ public class Util {
         }
         //TODO
     }
+
     private static void loadImage(Context context, int resource, ImageView imageView){
         Glide.with(context)
                 .load(resource)

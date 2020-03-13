@@ -142,6 +142,7 @@ public class Weather {
         @SerializedName("icon")
         public String iconCode;
     }
+
     class MMain{
         @SerializedName("temp")
         public String temp;
